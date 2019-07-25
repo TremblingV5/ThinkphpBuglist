@@ -1,0 +1,57 @@
+{extend name="index"/}
+{block name="title"}
+添加BUG信息
+{/block}
+{block name="url"}
+    <li class="active"><a href="{:url('Index/Index')}">所有BUG</a></li>
+    <li><a href="{:url('People/Index')}">人员管理</a></li>
+    <li><a href="{:url('Status/Index')}">状态管理</a></li>
+    <li><a href="#"></a></li>
+{/block}
+{block name="content"}
+	<div class="modal-dialog">
+		<div class="col-md-12 center">
+			<form action="{:url('save')}" method="post"  role="form">
+				<div class="form-group">
+					<label for="title">标题:</label>
+					<input type="text" name="title" id="title" class="form-control" />
+				</div>
+				<div class="form-group">
+					<label for="version">版本:</label>
+					<input type="text" name="version" id="version" class="form-control" />
+				</div>
+				<div class="form-group">
+					<label for="raise_id">提出人：</label>
+					<select name="raise_id" id="raise_id" class="form-control">
+						{volist name="Peoples" id="_Peoples"}
+							<option value="{$_Peoples->getData('id')}">{$_Peoples->getData('name')}</option>
+						{/volist}
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="duty_id">责任人：</label>
+					<select name="duty_id" id="duty_id" class="form-control">
+						{volist name="Peoples" id="_Peoples"}
+							<option value="{$_Peoples->getData('id')}">{$_Peoples->getData('name')}</option>
+						{/volist}
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="status_id">状态：</label>
+					<select name="status_id" id="status_id" class="form-control">
+						{volist name="Statuss" id="_Statuss"}
+							<option value="{$_Statuss->getData('id')}">{$_Statuss->getData('status_name')}</option>
+						{/volist}
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="descript">描述：</label>
+					<textarea name="descript" class="form-control" id="descript"></textarea>
+				</div>
+				<button type="submit" class="btn btn-info col-md-12">创建</button>
+			</form>
+		</div>
+	</div>
+{/block}
+{block name="page"}
+{/block}

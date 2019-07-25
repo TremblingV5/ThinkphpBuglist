@@ -1,0 +1,59 @@
+{extend name="index"/}
+{block name="title"}
+编辑Bug信息
+{/block}
+{block name="url"}
+    <li class="active"><a href="{:url('Index/Index')}">所有BUG</a></li>
+    <li><a href="{:url('People/Index')}">人员管理</a></li>
+    <li><a href="{:url('Status/Index')}">状态管理</a></li>
+    <li><a href="#"></a></li>
+{/block}
+{block name="content"}
+		<div class="modal-dialog">
+			<div class="col-md-12 center">
+				<form action="{:url('Update?id='.$Bugs->getData('id'))}" method="post"  role="form">
+					<div class="form-group">
+						<label for="title">标题:</label>
+						<input type="text" name="title" id="title" class="form-control" value="{$Bugs->getData('title')}" disabled="disabled" />
+					</div>
+					<div class="form-group">
+						<label for="version">版本:</label>
+						<input type="text" name="version" id="version" class="form-control" value="{$Bugs->getData('version')}" disabled="disabled" />
+					</div>
+					<div class="form-group">
+						<label for="raise_id">提出人：</label>
+						<input type="text" name="raise_id" id="raise_id" class="form-control" value="{$Bugs->getRaisePeople()->getData('name')}" disabled="disabled" />
+					</div>
+					<div class="form-group">
+						<label for="duty_id">责任人：</label>
+						<input type="text" name="duty_id" id="duty_id" class="form-control" value="{$Bugs->getDutyPeople()->getData('name')}" disabled="disabled" />
+					</div>
+					<div class="form-group">
+					<!-- {$Bugs->getStatus()->getData('status_name')} -->
+						<label for="status_id">状态：</label>
+						<select name="status_id" id="status_id" class="form-control">
+							<option value="{$Bugs->getData('status_id')}">{$Bugs->getStatus()->getData('status_name')}</option>
+							{volist name="Statuss" id="_Statuss"}
+								<option value="{$_Statuss->getData('id')}">{$_Statuss->getData('status_name')}</option>
+							{/volist}
+						</select>
+					</div>
+					<!-- <div class="form-group">
+						<label for="status_id">状态：</label>
+						<input type="text" name="status_id" id="status_id" class="form-control" value="{$Bugs->getStatus()->getData('status_name')}" disabled="disabled" />
+					</div> -->
+					<div class="form-group">
+						<label for="descript"info>描述：</label>
+						<textarea name="descript" id="descript" style="height: 100px;" class="form-control">{$Bugs->getData('descript')}</textarea>
+					</div>
+					<button class="btn btn-primary col-md-12" type="submit">确认</button>
+					<br />
+					<br />
+					<br />
+					<a class="btn btn-info" style="display: block;" href="javascript:history.back(-1);">返回</a>
+				</form>
+			</div>
+		</div>
+{/block}
+{block name="page"}
+{/block}

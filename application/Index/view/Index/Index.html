@@ -1,0 +1,73 @@
+{extend name="index"/}
+{block name="title"}
+BugList
+{/block}
+{block name="url"}
+    <li class="active"><a href="{:url('Index/Index')}">所有BUG</a></li>
+    <li><a href="{:url('People/Index')}">人员管理</a></li>
+    <li><a href="{:url('Status/Index')}">状态管理</a></li>
+    <li><a href="#"></a></li>
+{/block}
+<!-- {block name="menu"}
+	<li><a href="{:url('')}">患者查看</a></li>
+	<li><a href="{:url('')}">联系客服</a></li>
+	<li><a href="{:url('admin/Login/logOut')}">安全退出</a></li>
+{/block} -->
+{block name="content"}
+<div class="row">
+				
+                <div class="col-sm-6">
+                    <form class="form-inline">
+						<div class="form-group">
+						    <label class="sr-only" for="name">查询目标：</label>
+						    <select name="select_flag" id="select_flag" class="form-control">
+						    	<option value="1">标题</option>
+						    	<option value="0">人员</option>
+						    </select>
+						</div>
+                        <div class="form-group">
+                            <label class="sr-only" for="name">姓名</label>
+                            <input name="name" type="text" class="form-control" placeholder="请输入..." value={:input( 'get.name')}>
+                        </div>
+                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+                    </form>
+                </div>
+				<div class="col-sm-2 text-right">
+					<a href="{:url('index?flag=0')}" class="btn btn-primary">查看已关闭任务</a>
+				</div>
+				<div class="col-sm-2 text-right">
+					<a href="{:url('index?flag=1')}#" class="btn btn-primary">查看未关闭任务</a>
+				</div>
+				<div class="col-md-2 text-right">
+				    <a href="{:url('add')}" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>&nbsp;添加</a>
+				</div>
+            </div>
+			<hr />
+            <table class="table table-hover table-bordered">
+                <tr class="info">
+                    <th>序号</th>
+					<th class="col-sm-4">标题</th>
+                    <th>提出人</th>
+                    <th>责任人</th>
+                    <th>创建时间</th>
+                    <th>更新时间</th>
+					<th>状态</th>
+					<th>父任务序号</th>
+                </tr>
+				{volist name="Bugs" id="_Bugs" key="key"}
+				<tr>
+					<td class="ceter">{$_Bugs->getData('id')}</td>
+					<td><a href="{:url('Show?id=' . $_Bugs->getData('id'))}">{$_Bugs->getData('title')}</a></td>
+					<td>{$_Bugs->getRaisePeople()->getData('name')}</td>
+					<td>{$_Bugs->getDutyPeople()->getData('name')}</td>
+					<td>{$_Bugs->create_time}</td>
+					<td>{$_Bugs->update_time}</td>
+					<td>{$_Bugs->getStatus()->getData('status_name')}</td>
+					<td>{$_Bugs->getDutyId($_Bugs->getData('last_id'))}</a></td>
+				</tr>
+				{/volist}
+			</table>
+{/block}
+{block name="page"}
+	<div style="float: right;">{$Bugs->render()}</div>
+{/block}

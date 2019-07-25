@@ -1,0 +1,29 @@
+{extend name="index"/}
+{block name="title"}
+添加人员信息
+{/block}
+{block name="url"}
+    <li><a href="{:url('Index/Index')}">所有BUG</a></li>
+    <li class="active"><a href="{:url('People/Index')}">人员管理</a></li>
+    <li><a href="{:url('Status/Index')}">状态管理</a></li>
+    <li><a href="#"></a></li>
+{/block}
+{block name="content"}
+	<div class="modal-dialog">
+		<div class="col-md-12 center">
+			<form action="{:url('save')}" method="post"  role="form">
+				<div class="form-group">
+					<label for="name">姓名:</label>
+					<input type="text" name="name" id="name" class="form-control" />
+				</div>
+				<div class="form-group">
+					<label for="email">邮箱:</label>
+					<input type="text" name="email" id="email" class="form-control" />
+				</div>
+				<button type="submit" class="btn btn-info col-md-12">创建</button>
+			</form>
+		</div>
+	</div>
+{/block}
+{block name="page"}
+{/block}

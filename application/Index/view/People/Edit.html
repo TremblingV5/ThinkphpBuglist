@@ -1,0 +1,29 @@
+{extend name="index"/}
+{block name="title"}
+编辑人员信息
+{/block}
+{block name="url"}
+    <li><a href="{:url('Index/Index')}">所有BUG</a></li>
+    <li class="active"><a href="{:url('People/Index')}">人员管理</a></li>
+    <li><a href="{:url('Status/Index')}">状态管理</a></li>
+    <li><a href="#"></a></li>
+{/block}
+{block name="content"}
+	<div class="modal-dialog">
+		<div class="col-md-12 center">
+			<form action="{:url('update?id='.$Peoples->getData('id'))}" method="post"  role="form">
+				<div class="form-group">
+					<label for="name">姓名:</label>
+					<input type="text" name="name" id="name" class="form-control" value="{$Peoples->getData('name')}" />
+				</div>
+				<div class="form-group">
+					<label for="email">邮箱:</label>
+					<input type="text" name="email" id="email" class="form-control" value="{$Peoples->getData('email')}" />
+				</div>
+				<button type="submit" class="btn btn-info col-md-12">提交</button>
+			</form>
+		</div>
+	</div>
+{/block}
+{block name="page"}
+{/block}

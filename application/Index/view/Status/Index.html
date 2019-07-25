@@ -1,0 +1,58 @@
+{extend name="index"/}
+{block name="title"}
+状态信息
+{/block}
+{block name="url"}
+    <li><a href="{:url('Index/Index')}">所有BUG</a></li>
+    <li><a href="{:url('People/Index')}">人员管理</a></li>
+    <li class="active"><a href="{:url('Status/Index')}">状态管理</a></li>
+    <li><a href="#"></a></li>
+{/block}
+<!-- {block name="menu"}
+	<li><a href="{:url('')}">患者查看</a></li>
+	<li><a href="{:url('')}">联系客服</a></li>
+	<li><a href="{:url('admin/Login/logOut')}">安全退出</a></li>
+{/block} -->
+{block name="content"}
+<div class="row">
+				
+                <div class="col-md-8">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label class="sr-only" for="name">姓名</label>
+                            <input name="name" type="text" class="form-control" placeholder="状态名..." value={:input( 'get.name')}>
+                        </div>
+                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+                    </form>
+                </div>
+				<div class="col-md-4 text-right">
+				    <a href="{:url('add')}" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>&nbsp;添加</a>
+				</div>
+            </div>
+			<hr />
+            <table class="table table-hover table-bordered">
+                <tr class="info">
+                    <th>序号</th>
+					<th class="col-sm-4">状态名</th>
+                    <th>状态标识</th>
+					<th>修改</th>
+					<th>删除</th>
+                </tr>
+				{volist name="Statuss" id="_Statuss" key="key"}
+				<tr>
+					<td class="ceter">{$_Statuss->getData('id')}</td>
+					<td>{$_Statuss->getData('status_name')}</td>
+					<td>{$_Statuss->getFlag($_Statuss->getData('status_flag'))}</td>
+					<td>
+						<a href="{:url('Edit?id='.$_Statuss->getData('id'))}">修改</a>
+					</td>
+					<td>
+						<a href="{:url('delete?id='.$_Statuss->getData('id'))}">删除</a>
+					</td>
+				</tr>
+				{/volist}
+			</table>
+{/block}
+{block name="page"}
+	<div style="float: right;">{$Statuss->render()}</div>
+{/block}

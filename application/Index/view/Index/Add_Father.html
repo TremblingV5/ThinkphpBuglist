@@ -1,0 +1,43 @@
+{extend name="index"/}
+{block name="title"}
+添加父任务
+{/block}
+{block name="url"}
+    <li class="active"><a href="{:url('Index/Index')}">所有BUG</a></li>
+    <li><a href="{:url('People/Index')}">人员管理</a></li>
+    <li><a href="{:url('Status/Index')}">状态管理</a></li>
+    <li><a href="#"></a></li>
+{/block}
+{block name="content"}
+	<div class="col-sm-6">
+	        <form class="form-inline">
+	            <div class="form-group">
+	                <label class="sr-only" for="name">姓名</label>
+	                <input name="name" type="text" class="form-control" placeholder="请输入..." value={:input( 'get.name')}>
+	            </div>
+	            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+	        </form>
+	    </div>
+	</div>
+	
+		<hr />
+	<div class="modal-dialog">
+		<div class="col-md-12 center">
+			<hr />
+			<form action="{:url('fathersave')}" method="post"  role="form">
+				<input name="id" id="id" value="{$id}" style="display: none;"/>
+				<div class="form-group">
+					<label for="title">标题:</label>
+					<select name="last_id" id="last_id" class="form-control">
+						{volist name="Bugs" id="_Bugs" key="key"}
+							<option class="col-md-12 form-control" value="{$_Bugs->getData('id')}">{$_Bugs->getData('title')}</option>
+						{/volist}
+					</select>
+				</div>
+				<button type="submit" class="btn btn-info col-md-12">确定</button>
+			</form>
+		</div>
+	</div>
+{/block}
+{block name="page"}
+{/block}

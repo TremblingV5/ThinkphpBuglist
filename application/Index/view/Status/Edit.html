@@ -1,0 +1,32 @@
+{extend name="index"/}
+{block name="title"}
+编辑状态信息
+{/block}
+{block name="url"}
+    <li><a href="{:url('Index/Index')}">所有BUG</a></li>
+    <li><a href="{:url('People/Index')}">人员管理</a></li>
+    <li class="active"><a href="{:url('Status/Index')}">状态管理</a></li>
+    <li><a href="#"></a></li>
+{/block}
+{block name="content"}
+	<div class="modal-dialog">
+		<div class="col-md-12 center">
+			<form action="{:url('update?id='.$Statuss->getData('id'))}" method="post"  role="form">
+				<div class="form-group">
+					<label for="status_name">状态名:</label>
+					<input type="text" name="status_name" id="status_name" class="form-control" value="{$Statuss->getData('status_name')}" />
+				</div>
+				<div class="form-group">
+					<label for="status_flag">状态标识：</label>
+					<select name="status_flag" id="status_flag" class="form-control">
+						<option value="1">处理中</option>
+						<option value="0">已关闭</option>
+					</select>
+				</div>
+				<button type="submit" class="btn btn-info col-md-12">提交</button>
+			</form>
+		</div>
+	</div>
+{/block}
+{block name="page"}
+{/block}
